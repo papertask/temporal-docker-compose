@@ -15,8 +15,6 @@
 #   - Restart policies
 # ============================================================================
 
-version: "3.5"
-
 networks:
   temporal-network:
     driver: bridge
@@ -129,11 +127,12 @@ services:
     volumes:
       - ./dynamicconfig:/etc/temporal/config/dynamicconfig
     healthcheck:
-      test: ["CMD-SHELL", "temporal operator cluster health --address localhost:7233 || exit 1"]
+      # Use simple port check since 'temporal' CLI may not be available in auto-setup image
+      test: ["CMD-SHELL", "timeout 5 bash -c '</dev/tcp/localhost/7233' || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 120s
+      start_period: 60s
     logging:
       driver: "json-file"
       options:
