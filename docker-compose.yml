@@ -144,8 +144,10 @@ services:
       - ENABLE_ES=true
       - ES_SEEDS=elasticsearch
       - ES_VERSION=v7
-      - TEMPORAL_ADDRESS=temporal:7233
-      - TEMPORAL_CLI_ADDRESS=temporal:7233
+      # Use localhost for auto-setup script (runs inside this container)
+      # External services use 'temporal:7233' via Docker network alias
+      - TEMPORAL_ADDRESS=localhost:7233
+      - TEMPORAL_CLI_ADDRESS=localhost:7233
     ports:
       # Security: Bind to localhost only
       - "127.0.0.1:7233:7233"
