@@ -1,3 +1,21 @@
-.idea
-.pki
+# Environment variables with sensitive data
 .env
+
+# Docker volumes data
+temporal-elasticsearch-data/
+temporal-postgres-data/
+
+# Dynamic config (if contains sensitive data)
+# dynamicconfig/
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
